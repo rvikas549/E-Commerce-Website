@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Top Womens</title>
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+        /* Default category item styles */
+        .filter-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .filter-button.active {
+            background-color: green;
+            color: white;
+        }
+
+        .filter-button:not(.active):hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        /* Wrapper for each category item */
+        .category-item {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        .category-item img {
+            display: block;
+            width: 75%;
+            height: 300px;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(3, 0, 0, 0.9);
+            border-radius: 8px;
+        }
+
+        .category-item:hover img {
+            opacity: 0.9;
+        }
+
+        /* Product Card styles */
+        .product {
+            position: relative;
+            cursor: pointer;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: scale(1.1);
+        }
+
+        .product-image, .product-hover-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-hover-image {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product:hover .product-hover-image {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ddd;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Header -->
+    <%- include("header.ejs") %>
+
+    
+
+        <!-- Products Section -->
+        <section class="px-4 md:px-16 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center" id="productList">
+                <!-- Products will be dynamically generated here -->
+            </div>
+        </section>
+
+    <script>
+       const products = [
+            {
+                id: 1,
+                name: "Berry Blush",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1717657298_6652113.jpg?format=webp&w=480&dpr=1.3",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1717657298_6652113.jpg?format=webp&w=480&dpr=1.3",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 2,
+                name: "Mean Girls: A Little Dramatic",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713545031_6899349.jpg?format=webp&w=768&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713545031_6899349.jpg?format=webp&w=768&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 3,
+                name: "Powerpuff Girls: Tough To Beat",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713776785_8691973.jpg?format=webp&w=480&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713776785_8691973.jpg?format=webp&w=480&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 4,
+                name: "Mesh Top: Jungle Book",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1723865649_6550955.jpg?format=webp&w=768&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1723865649_6550955.jpg?format=webp&w=768&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 5,
+                name: "Solids: Blazing Orange",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1727960905_1836644.jpg?format=webp&w=480&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1727960905_1836644.jpg?format=webp&w=480&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 6,
+                name: "TSS Originals: Celestial",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1730802187_7769249.jpg?format=webp&w=480&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1730802187_7769249.jpg?format=webp&w=480&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 7,
+                name: "Mesh Top: Tropical Dream",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1715672334_3160585.jpg?format=webp&w=480&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1715672334_3160585.jpg?format=webp&w=480&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            },
+            {
+                id: 8,
+                name: "TSS Originals: Blossom",
+                image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1712061285_6924079.jpg?format=webp&w=480&dpr=1.1",
+                hoverImage: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1712061285_6924079.jpg?format=webp&w=480&dpr=1.1",
+                price: 999.00,
+                sizes: "S M L XL XXL",
+                category: "Crop Top"
+            }
+        ];
+
+
+
+
+        const productList = document.getElementById("productList");
+
+        // Function to display products
+        function displayProducts(category) {
+            productList.innerHTML = ''; // Clear current products
+            const filteredProducts = category ? products.filter(p => p.category === category) : products;
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product");
+
+                // Include the id in the URL
+                const queryParams = `?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}`;
+
+                productCard.innerHTML = `
+                <a href="/product?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}" class="product-link">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <img src="${product.hoverImage}" alt="${product.name}" class="product-hover-image">
+                </a>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price}</p>
+                </div>
+                `;
+
+                productList.appendChild(productCard);
+            });
+        }
+
+    
+        // Display all products by default
+        displayProducts();
+
+    </script>
+
+</body>
+</html>

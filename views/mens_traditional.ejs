@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional Men</title>
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+        /* Default category item styles */
+        .filter-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .filter-button.active {
+            background-color: green;
+            color: white;
+        }
+
+        .filter-button:not(.active):hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        /* Wrapper for each category item */
+        .category-item {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        .category-item img {
+            display: block;
+            width: 75%;
+            height: 300px;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(3, 0, 0, 0.9);
+            border-radius: 8px;
+        }
+
+        .category-item:hover img {
+            opacity: 0.9;
+        }
+
+        /* Product Card styles */
+        .product {
+            position: relative;
+            cursor: pointer;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: scale(1.1);
+        }
+
+        .product-image, .product-hover-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-hover-image {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product:hover .product-hover-image {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ddd;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Header -->
+    <%- include("header.ejs") %>
+
+    
+
+        <!-- Products Section -->
+        <section class="px-4 md:px-16 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center" id="productList">
+                <!-- Products will be dynamically generated here -->
+            </div>
+        </section>
+
+    <script>
+       const products = [
+            {
+                id: 1,
+                name: "Yellow Kurta",
+                image: "https://koranm.com/cdn/shop/files/1j8a7987_2_fa037b41-aa82-476c-84d9-de6942ec0079.jpg?v=1713357854&width=720",
+                hoverImage: "https://koranm.com/cdn/shop/files/1j8a7987_2_fa037b41-aa82-476c-84d9-de6942ec0079.jpg?v=1713357854&width=720",
+                price: 3999.00,
+                sizes: "S M L XL XXL",
+                category: "Kurta"
+            },
+            {
+                id: 2,
+                name: "Embroidered Purple Kurta",
+                image: "https://koranm.com/cdn/shop/files/1J8A4059.jpg?v=1712140103&width=340",
+                hoverImage: "https://koranm.com/cdn/shop/files/1J8A4059.jpg?v=1712140103&width=340",
+                price: 3999.00,
+                sizes: "S M L XL XXL",
+                category: "Kurta"
+            },
+            {
+                id: 3,
+                name: "Golden Sherwani",
+                image: "https://koranm.com/cdn/shop/files/kora_delhi0739.jpg?v=1719205776&width=540",
+                hoverImage: "https://koranm.com/cdn/shop/files/kora_delhi0739.jpg?v=1719205776&width=540",
+                price: 7999.00,
+                sizes: "S M L XL XXL",
+                category: "Sherwani"
+            },
+            {
+                id: 4,
+                name: "Magenta Kurta",
+                image: "https://koranm.com/cdn/shop/files/1J8A2949.jpg?v=1712052851&width=720",
+                hoverImage: "https://koranm.com/cdn/shop/files/1J8A2949.jpg?v=1712052851&width=720",
+                price: 3999.00,
+                sizes: "S M L XL XXL",
+                category: "Kurta"
+            },
+            {
+                id: 5,
+                name: "White Sherwani",
+                image: "https://koranm.com/cdn/shop/files/10_49ef71fb-98ed-4146-980c-3659694ae30d.jpg?v=1712919279&width=720",
+                hoverImage: "https://koranm.com/cdn/shop/files/10_49ef71fb-98ed-4146-980c-3659694ae30d.jpg?v=1712919279&width=720",
+                price: 7999.00,
+                sizes: "S M L XL XXL",
+                category: "Sherwani"
+            },
+            {
+                id: 6,
+                name: "Light Pink Sherwani",
+                image: "https://koranm.com/cdn/shop/files/41_8c7c305a-03ff-4f11-a3cd-82bd269bf1c1.jpg?v=1712922081&width=400",
+                hoverImage: "https://koranm.com/cdn/shop/files/41_8c7c305a-03ff-4f11-a3cd-82bd269bf1c1.jpg?v=1712922081&width=400",
+                price: 7999.00,
+                sizes: "S M L XL XXL",
+                category: "Sherwani"
+            },
+            {
+                id: 7,
+                name: "Olive Green Kurta",
+                image: "https://koranm.com/cdn/shop/files/1j8a8238.jpg?v=1719577489&width=540",
+                hoverImage: "https://koranm.com/cdn/shop/files/1j8a8238.jpg?v=1719577489&width=540",
+                price: 3999.00,
+                sizes: "S M L XL XXL",
+                category: "Kurta"
+            },
+            {
+                id: 8,
+                name: "Dark Black Kurta",
+                image: "https://koranm.com/cdn/shop/files/1j8a5111.jpg?v=1718947771&width=1800",
+                hoverImage: "https://koranm.com/cdn/shop/files/1j8a5111.jpg?v=1718947771&width=1800",
+                price: 3999.00,
+                sizes: "S M L XL XXL",
+                category: "Kurta"
+            }
+        ];
+
+
+
+        const productList = document.getElementById("productList");
+
+        // Function to display products
+        function displayProducts(category) {
+            productList.innerHTML = ''; // Clear current products
+            const filteredProducts = category ? products.filter(p => p.category === category) : products;
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product");
+
+                // Include the id in the URL
+                const queryParams = `?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}`;
+
+                productCard.innerHTML = `
+                <a href="/product?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}" class="product-link">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <img src="${product.hoverImage}" alt="${product.name}" class="product-hover-image">
+                </a>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price}</p>
+                </div>
+                `;
+
+                productList.appendChild(productCard);
+            });
+        }
+
+    
+        // Display all products by default
+        displayProducts();
+
+    </script>
+
+</body>
+</html>

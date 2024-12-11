@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <title>Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <%- include("header.ejs") %>
+
+    <!-- Main Content -->
+    <main class="text-center py-10">
+        <h2 class="text-4xl font-bold mb-6">Grateful to have you as a Customer!</h2>
+        <div class="flex justify-center items-center w-64 h-64 mx-auto  rounded-full">
+        
+        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+        <dotlottie-player src="https://lottie.host/b816564a-b7e7-47fc-b240-9328e56ced7c/LNNwSkPhWf.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+        
+        </div>
+        <div class="mt-10 flex justify-center gap-6">
+        <a href="/" class="px-6 py-3 bg-black text-white font-bold text-sm rounded hover:bg-white hover:text-black border border-black">
+            Continue your shopping →
+        </a>
+        <a href="/invoice" class="px-6 py-3 bg-black text-white font-bold text-sm rounded hover:bg-white hover:text-black border border-black">
+            Download Invoice →
+        </a>
+        </div>
+    </main>
+    <!-- <div class="fixed bottom-6 right-6 text-2xl font-bold">
+        <p>You are logged in as: <%= email %></p>
+        <a href="/logout"><button class=" px-6 py-3 bg-black text-white font-bold text-sm rounded hover:bg-white hover:text-black border border-black">Logout</button></a>
+    </div> -->
+    <div class="fixed bottom-6 right-6 text-2xl font-bold">
+        <p>You are logged in as: <%= email %></p><br>
+    </div>
+    
+    <div class="fixed bottom-6 right-6" style="margin-top: 2px;">
+        <a href="/logout">
+            <button class="bg-black text-white font-bold text-2xl rounded hover:bg-white hover:text-black border border-black">
+                Logout
+            </button>
+        </a>
+
+    </div>
+    
+</body>
+</html>
+
+

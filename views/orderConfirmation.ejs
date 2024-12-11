@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Confirmation</title>
+</head>
+<body>
+  <h1>Thank you for your Order!!</h1>
+  <p> <%= customerName %>! </p>
+  <h5>Your order details:</h5>
+  <ul>
+    <% orderDetails.forEach(item => { %>
+      <li><%= item.name %> - Quantity: <%= item.quantity %>, Size: <%= item.size %>, Price: ₹<%= item.price %></li>
+    <% }) %>
+  </ul>
+  <p><strong>Total:</strong> ₹<%= totalAmount %></p>
+</body>
+</html>

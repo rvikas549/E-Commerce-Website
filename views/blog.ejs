@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header -->
+  <%- include("header.ejs") %>
+
+  <!-- Blog Section -->
+  <main class="py-8">
+    <h1 class="text-center text-3xl font-bold mb-6">BLOG</h1>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+      <!-- Blog Item -->
+       <a href="https://www.businessinsider.com/how-15-million-plastic-bottles-are-turned-into-clothing-2024-6">
+        <div class="bg-white rounded shadow p-4">
+        <img src="https://i.insider.com/667dc57ad1c84a0eaca880b0?width=850&format=jpeg&auto=webp" alt="Blog Image" class="rounded-t">
+        <div class="p-4">
+          <h2 class="font-bold text-lg mb-2">How 1.5 million plastic bottles are turned into clothing every day</h2>
+          <p class="text-gray-700 text-sm">
+            Polyester is one of the most popular fabrics in the world. Made from PET plastic, it is prized for its durability, lightness, and low cost of production......
+          </p>
+        </div>
+      </div>
+       </a>
+      
+      <!-- Duplicate items for other blog posts -->
+      <a href="https://www.businessinsider.com/why-billions-of-new-sneakers-are-not-being-recycled-2023-11">
+      <div class="bg-white rounded shadow p-4">
+        
+        <img src="https://i.insider.com/654bbc603cc84b4dfafeaadf?width=850&format=jpeg&auto=webp" alt="Blog Image" class="rounded-t">
+        <div class="p-4">
+          <h2 class="font-bold text-lg mb-2">Why billions of new sneakers are not being recycled</h2>
+          <p class="text-gray-700 text-sm">
+            More than 50 billion shoes are made every year. The biggest manufacturers, like Nike, Adidas, and Asics, make them durable enough to run hundreds of miles. But this also makes them incredibly expensive and difficult to recycle.
+          </p>
+        </div>
+      </div>
+      </a>
+      <a href="https://believeintherun.com/shoe-reviews/salomon-drx-defy-review/">
+      <div class="bg-white rounded shadow p-4">
+        <img src="https://www.nykaafashion.com/style-files/wp-content/uploads/2024/11/Banner.gif" alt="Blog Image" class="rounded-t">
+        <div class="p-4">
+          <h2 class="font-bold text-lg mb-2">Salomon DRX Defy Review: Defy-ing Gravel-ty</h2>
+          <p class="text-gray-700 text-sm">
+            We (and by “we” I mean our resident trail stud, Taylor Bodin) recently reviewed the Salomon DRX Defy Grvl, a cushioned gravel cruiser based on Salomon’s DRX line
+          </p>
+        </div>
+      </div>
+    </a>
+      <a href="https://www.businessinsider.com/most-iconic-fashion-designers-of-the-last-century">
+      <div class="bg-white rounded shadow p-4">
+        <img src="https://i.insider.com/5e348e76ab49fd2d57765d29?width=1000&format=jpeg&auto=webp" alt="Blog Image" class="rounded-t">
+        <div class="p-4">
+          <h2 class="font-bold text-lg mb-2">The most iconic fashion designers of the last 100 years.</h2>
+          <p class="text-gray-700 text-sm">
+            For decades, the fashion industry has had an unlimited-growth mindset, fueled by cheap production and opacity.  
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  </main>
+
+  <!-- Pagination
+  <nav class="flex justify-center items-center space-x-2 my-6">
+    <a href="#" class="px-4 py-2 rounded bg-black text-white">1</a>
+    <a href="#" class="px-4 py-2 rounded bg-gray-200">2</a>
+    <a href="#" class="px-4 py-2 rounded bg-gray-200">3</a>
+    <a href="#" class="px-4 py-2 rounded bg-gray-200">4</a>
+    <a href="#" class="px-4 py-2 rounded bg-gray-200">5</a>
+    <a href="#" class="px-4 py-2 rounded bg-gray-200">6</a>
+  </nav> -->
+
+</body>
+</html>

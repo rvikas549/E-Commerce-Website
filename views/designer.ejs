@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <title>REFURBISHED</title>
+    <style>
+      * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <%- include("header.ejs") %>
+    
+    <div class="bg-black text-white text-center py-2 text-sm">
+        QUALITY CHECKING DONE BEFORE SELLING BACK!!!
+      </div>
+    
+      <!-- Content -->
+      <main class="max-w-7xl mx-auto py-8">
+        <h1 class="text-3xl font-bold text-center mb-6">REFURBISHED PRODUCT'S</h1>
+    
+        <!-- Filter Section -->
+        <!-- <div class="flex justify-center gap-4 mb-8">
+          <select class="border rounded-md px-4 py-2">
+            <option value="" disabled selected>Select Type</option>
+                  <option value="menswear">Menswear</option>
+                  <option value="womenswear">Womenswear</option>
+          </select>
+
+          <select class="border rounded-md px-4 py-2">
+            <option value="" disabled selected>Select Type</option>
+                  <option value="menswear">Oversided Tshirts</option>
+                  <option value="womenswear">Shirts</option>
+          </select>
+
+          <select class="border rounded-md px-4 py-2">
+            <option value="" disabled selected>Select Type</option>
+                  <option value="menswear">Jeans</option>
+                  <option value="womenswear">Cargos</option>
+          </select>
+          
+        </div> -->
+    
+        <!-- Products Section -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <!-- Product Item -->
+
+          <% List.forEach(item => { %>
+            <div class="bg-white p-4 rounded-md shadow-md flex flex-col items-center">
+                <img src="<%= item.refurbImg %>" alt="Image" class="w-full h-84 object-cover rounded-xl mb-4 ">
+                <h2 class="text-lg font-semibold text-center"><%= item.refurbName %></h2>
+                <p class="text-gray-500 font-semibold text-center">₹<%= item.refurbPrice %></p>
+            </div>
+            <% }); %>
+            
+            
+          <!-- Repeat similar product blocks -->
+          <!-- <div class="bg-white p-4 rounded-md shadow-md">
+            <img src="https://via.placeholder.com/200" alt="White Cargo" class="w-full h-64 object-cover rounded-md mb-4">
+            <h2 class="text-lg font-semibold">White Cargo's</h2>
+            <p class="text-gray-500">INR 999/-</p>
+            <p class="text-sm">S M L XL XXL</p>
+          </div>
+          <div class="bg-white p-4 rounded-md shadow-md">
+            <img src="https://via.placeholder.com/200" alt="Beige Cargo" class="w-full h-64 object-cover rounded-md mb-4">
+            <h2 class="text-lg font-semibold">Beige Cargo's</h2>
+            <p class="text-gray-500">INR 999/-</p>
+            <p class="text-sm">S M L XL XXL</p>
+          </div>
+          <div class="bg-white p-4 rounded-md shadow-md">
+            <img src="https://via.placeholder.com/200" alt="Brown Cargo" class="w-full h-64 object-cover rounded-md mb-4">
+            <h2 class="text-lg font-semibold">Brown Cargo's</h2>
+            <p class="text-gray-500">INR 999/-</p>
+            <p class="text-sm">S M L XL XXL</p>
+          </div> -->
+        </div>
+    
+        <!-- View More Button -->
+        <!-- <div class="flex justify-center mt-8">
+          <button class="bg-black text-white px-6 py-2 rounded-md">VIEW MORE</button>
+        </div> -->
+      </main>
+</body>
+</html>

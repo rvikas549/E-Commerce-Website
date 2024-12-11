@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans">
+
+  <!-- Navbar -->
+  <%- include("header.ejs") %>
+
+  <!-- Main Content -->
+  <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <!-- Cart Items -->
+    <div class="col-span-2">
+      <h2 class="text-3xl font-bold mb-4">Your cart</h2>
+      <p class="text-gray-600 mb-6">Not ready to checkout? <a href="/" class="text-blue-500">Continue Shopping</a></p>
+      
+      <div id="cartItems" class="space-y-6">
+        <!-- Cart items will be dynamically loaded here -->
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="col-span-1">
+      <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
+      <div class="space-y-2">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="subtotal">INR 0</span>
+        </div>
+        <div class="flex justify-between font-bold">
+          <span>Total</span>
+          <span id="total">INR 0</span>
+        </div>
+      </div>
+      <button class="w-full bg-black text-white py-3 mt-6 rounded" id="checkoutButton">
+        <a href="/login">
+          Continue to Checkout
+        </a>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Fetch cart items and populate the cart
+    fetch('/cart-items')
+      .then(response => response.json())
+      .then(cartItems => {
+        const cartContainer = document.getElementById('cartItems');
+        const subtotalElement = document.getElementById('subtotal');
+        const totalElement = document.getElementById('total');
+
+        let subtotal = 0;
+
+        cartItems.forEach(item => {
+          const itemTotal = item.price * item.quantity;
+          subtotal += itemTotal;
+
+          const itemDiv = document.createElement('div');
+          itemDiv.classList.add('flex', 'justify-between', 'border-b', 'pb-4');
+          itemDiv.innerHTML = `
+            <div class="flex space-x-4">
+              <img src="${item.image}" alt="${item.name}" class="bg-gray-200 w-20 h-20">
+              <div>
+                <h3 class="font-bold">${item.name}</h3>
+                <p>Size: ${item.size}</p>
+                <p>Quantity: ${item.quantity}</p>
+                <p class="font-bold">INR ${itemTotal.toFixed(2)}</p>
+              </div>
+            </div>
+            <button class="text-red-500 remove-item" data-id="${item.id}" data-size="${item.size}">Remove</button>
+          `;
+          cartContainer.appendChild(itemDiv);
+        });
+
+        subtotalElement.textContent = `INR ${subtotal.toFixed(2)}`;
+        totalElement.textContent = `INR ${subtotal.toFixed(2)}`;
+
+        // Attach event listeners to remove buttons
+        document.querySelectorAll('.remove-item').forEach(button => {
+          button.addEventListener('click', () => {
+            const itemId = button.getAttribute('data-id');
+            const itemSize = button.getAttribute('data-size');
+
+            // Send DELETE request to remove the item
+            fetch(`/remove-from-cart/${itemId}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ size: itemSize }) // Include size in the request body
+            })
+            .then(response => {
+              if (response.ok) {
+                // Reload the page to reflect the changes
+                window.location.reload();  // Refresh the page after item is removed
+              } else {
+                console.error('Failed to remove item:', response);
+              }
+            })
+            .catch(err => {
+              console.error('Error removing item:', err);
+            });
+          });
+        });
+      })
+      .catch(err => console.error('Error fetching cart items:', err));
+  </script>
+</body>
+</html>

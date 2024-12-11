@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Womens</title>
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* Default category item styles */
+        .filter-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .filter-button.active {
+            background-color: green;
+            color: white;
+        }
+
+        .filter-button:not(.active):hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        /* Wrapper for each category item */
+        .category-item {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        Image hover effect
+        .category-item img {
+            display: block;
+            width: 75%;
+            height:300px;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    
+        /* Text styling */
+        .category-item .font-medium {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover effect for the entire category item */
+        .category-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(3, 0, 0, 0.9);
+            border-radius: 8px;
+        }
+
+        /* Hover effect for the image inside the container */
+        .category-item:hover img {
+            opacity: 0.9;
+        }
+
+        /* Hover effect for the text */
+        .category-item:hover .font-medium {
+            transform: scale(1.1);
+        }
+
+        /* Product Card styles */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            position: relative;
+            cursor: pointer;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: scale(1.2);
+        }
+
+        .product-image, .product-hover-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-hover-image {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product:hover .product-hover-image {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ddd;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+        }
+        @media (max-width: 1024px) {
+    /* Center-align categories section */
+    #categoryItems {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .category-item {
+        width: 40%; /* Adjust width for larger tablets */
+    }
+
+    .category-item img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Adjust product grid */
+    .product-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .product {
+        width: 100%;
+    }
+
+    /* Filter buttons alignment */
+    .filter-button {
+        width: 30%; /* Adjust button width for larger screens */
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Center-align categories section */
+    #categoryItems {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .category-item {
+        width: 80%; /* Adjust width for smaller tablets */
+        margin: 0 auto;
+    }
+
+    .category-item img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Adjust product grid */
+    .product-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .product {
+        width: 100%;
+    }
+
+    /* Filter buttons alignment */
+    .filter-button {
+        width: 70%; /* Adjust button width for smaller screens */
+        text-align: center;
+    }
+
+    /* Sale banner text adjustments */
+    .bg-black p {
+        font-size: 1rem; /* Reduce font size */
+    }
+}
+
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Header -->
+    <%- include("header.ejs") %>
+
+    <!-- Sale Banner -->
+    <div class="bg-black text-white text-center py-2">
+        <p class="font-bold text-lg animate-pulse">
+            <marquee>50% OFF SALE 50% OFF SALE 50% OFF SALE 50% OFF SALE</marquee>
+        </p>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="text-center py-10">
+        <h2 class="text-3xl font-semibold mb-8">Women's Wear</h2>
+        <div class="flex flex-col md:flex-row justify-center gap-8">
+            <div class="text-center category-item">
+                <a href="/womenstop">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20230620/hCXR/6492141d42f9e729d757cc26/-473Wx593H-463276982-black-MODEL.jpg" alt="Crop Top" class="w-48 h-70 mx-auto rounded-lg">
+                    <p class="mt-4 text-xl font-medium">Crop Top</p> 
+                </a>
+            </div>
+            <div class="text-center category-item">
+                <a href="/womensoversized">
+                    <img src="https://theloungedreams.com/cdn/shop/products/1_6232f1e8-256e-4d8d-931e-384ff0390ad1.jpg?v=1686987560" alt="Oversize Tee's" class="w-48 h-70 mx-auto rounded-lg">
+                    <p class="mt-4 text-xl font-medium">Oversize Tee's</p>
+                </a>
+            </div>
+            <div class="text-center category-item">
+                <a href="/womensprinted">
+                    <img src="https://cdn.media.amplience.net/i/whitestuff/435248-NAVY_PR-L" alt="Printed Shirt" class="w-48 h-70 mx-auto rounded-lg">
+                    <p class="mt-4 text-xl font-medium">Printed Shirt</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="flex justify-center space-x-4 mb-8">
+        <button class="px-4 py-2 border border-gray-500 rounded-md font-medium filter-button" id="cargosFilter">Cargo's</button>
+        <button class="px-4 py-2 border border-gray-500 rounded-md font-medium filter-button" id="jeansFilter">Jean's</button>
+        <button class="px-4 py-2 border border-gray-500 rounded-md font-medium filter-button" id="skirtsFilter">Skirt</button>
+    </div>
+
+    <!-- Products Section -->
+    <section class="px-4 md:px-16 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center" id="productList">
+            <!-- Products will be dynamically generated here -->
+        </div>
+    </section>
+
+    <script>
+       const products = [
+            { id: 1, name: "Green Cargo's", image: "images/greenwomencargo.jpg", hoverImage: "images/greenwomencargo.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            { id: 2, name: "Blue Cargo's", image: "images/bluecargowomen.jpg", hoverImage: "images/bluecargowomen.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            { id: 3, name: "Black Cargo's", image: "images/blackcargowomen.jpg", hoverImage: "images/blackcargowomen.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            { id: 4, name: "Brown Cargo's", image: "images/browncargowomen.jpg", hoverImage: "images/browncargowomen.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            
+            
+            { id: 5, name: "Booty Jean's", image: "images/bootyjeans.jpg", hoverImage: "images/bootyjeans.jpg", price: 799.00, sizes: "S M L XL XXL", category: "Jean's" },
+            { id: 6, name: "Mom Jean's", image: "images/momjeans.jpg", hoverImage: "images/momjeans.jpg", price: 799.00, sizes: "S M L XL XXL", category: "Jean's" },
+            { id: 7, name: "Embroidery Jean's", image: "images/embjeans.jpg", hoverImage: "images/embjeans.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Jean's" },
+            { id: 8, name: "Denim Jean's", image: "images/denimjeans.jpg", hoverImage: "images/denimjeans.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Jean's" },
+
+            { id: 9, name: "Brown Skirt", image: "images/Skirt1.jpg", hoverImage: "images/Skirt1.jpg", price: 899.00, sizes: "S M L XL XXL", category: "Skirt" },
+            { id: 10, name: "White Skirt", image: "images/Skirt2.jpg", hoverImage: "images/Skirt2.jpg", price: 899.00, sizes: "S M L XL XXL", category: "Skirt" },
+            { id: 11, name: "Blue Skirt", image: "images/Skirt3.jpg", hoverImage: "images/Skirt3.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Skirt" },
+            { id: 12, name: "Pink Skirt", image: "images/Skirt4.jpg", hoverImage: "images/Skirt4.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Skirt" },
+        ];
+
+
+        const productList = document.getElementById("productList");
+
+        // Function to display products
+        function displayProducts(category) {
+            productList.innerHTML = ''; // Clear current products
+            const filteredProducts = category ? products.filter(p => p.category === category) : products;
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product");
+
+                // Include the id in the URL
+                const queryParams = `?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}`;
+
+                productCard.innerHTML = `
+                <a href="/product?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}" class="product-link">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <img src="${product.hoverImage}" alt="${product.name}" class="product-hover-image">
+                </a>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price}</p>
+                </div>
+                `;
+
+                productList.appendChild(productCard);
+            });
+        }
+
+        // Filter button handlers
+        document.getElementById("cargosFilter").addEventListener("click", () => displayProducts("Cargos"));
+        document.getElementById("jeansFilter").addEventListener("click", () => displayProducts("Jean's"));
+        document.getElementById("skirtsFilter").addEventListener("click", () => displayProducts("Skirt"));
+
+        // Display all products by default
+        displayProducts();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= name %> - Product Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+<%- include("header.ejs") %>
+
+<div class="container mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row items-center">
+        <!-- Product Image -->
+        <img src="<%= image %>" class="w-full md:w-1/2 rounded-lg shadow-lg" alt="<%= name %>">
+        
+        <!-- Product Details -->
+        <div class="mt-8 md:mt-0 md:ml-8">
+            <h2 class="text-3xl font-semibold"><%= name %></h2>
+            <p class="text-xl text-gray-600 mt-2"><%= price %></p>
+            <p class="mt-4 text-gray-800">Sizes Available: <%= sizes %></p>
+
+            <!-- Add to Cart Form -->
+            <form action="/add-to-cart" method="POST" class="mt-6">
+                <input type="hidden" name="id" value="<%= id %>"> <!-- Added product id -->
+                <input type="hidden" name="name" value="<%= name %>">
+                <input type="hidden" name="price" value="<%= price %>">
+                <input type="hidden" name="image" value="<%= image %>">
+                <label for="size" class="block text-gray-700">Choose Size:</label>
+                <select name="size" id="size" class="border p-2 rounded w-full">
+                    <% sizes.split(' ').forEach(size => { %>
+                        <option value="<%= size %>"><%= size %></option>
+                    <% }); %>
+                </select>
+                <label for="quantity" class="block text-gray-700 mt-4">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" class="border p-2 rounded w-full">
+                <button type="submit" class="w-full bg-black text-white py-3 mt-4 rounded">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

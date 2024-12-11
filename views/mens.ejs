@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mens</title>
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+        /* Default category item styles */
+        .filter-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .filter-button.active {
+            background-color: green;
+            color: white;
+        }
+
+        .filter-button:not(.active):hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        /* Wrapper for each category item */
+        .category-item {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        /* Image hover effect */
+        .category-item img {
+            display: block;
+            width: 75%;
+            height:300px;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Text styling */
+        .category-item .font-medium {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover effect for the entire category item */
+        .category-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(3, 0, 0, 0.9);
+            border-radius: 8px;
+        }
+
+        /* Hover effect for the image inside the container */
+        .category-item:hover img {
+            opacity: 0.9;
+        }
+
+        /* Hover effect for the text */
+        .category-item:hover .font-medium {
+            transform: scale(1.1);
+        }
+
+        /* Product Card styles */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            position: relative;
+            cursor: pointer;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: scale(1.2);
+        }
+
+        .product-image, .product-hover-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-hover-image {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product:hover .product-hover-image {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ddd;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+        }
+        @media (max-width: 1024px) {
+            /* Center-align categories section */
+            #categoryItems {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .category-item {
+                width: 40%; /* Adjust width for larger tablets */
+            }
+
+            .category-item img {
+                width: 100%;
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            /* Adjust product grid */
+            .product-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 16px;
+            }
+
+            .product {
+                width: 100%;
+            }
+
+            /* Filter buttons alignment */
+            .filter-button {
+                width: 30%; /* Adjust button width for larger screens */
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Center-align categories section */
+            #categoryItems {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-item {
+                width: 80%; /* Adjust width for smaller tablets */
+                margin: 0 auto;
+            }
+
+            .category-item img {
+                width: 100%;
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            /* Adjust product grid */
+            .product-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .product {
+                width: 100%;
+            }
+
+            /* Filter buttons alignment */
+            .filter-button {
+                width: 70%; /* Adjust button width for smaller screens */
+                text-align: center;
+            }
+
+            /* Sale banner text adjustments */
+            .bg-black p {
+                font-size: 1rem; /* Reduce font size */
+            }
+        }
+
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Header -->
+    <%- include("header.ejs") %>
+
+    <!-- Sale Banner -->
+    <div class="bg-black text-white text-center py-2">
+        <p class="font-bold text-lg animate-pulse">
+            <marquee>50% OFF SALE 50% OFF SALE 50% OFF SALE 50% OFF SALE</marquee>
+        </p>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="text-center py-10">
+        <h2 class="text-3xl font-semibold mb-8">Men's Wear</h2>
+        <div class="flex flex-col md:flex-row justify-center gap-8" id="categoryItems">
+            <div class="text-center category-item">
+                <a href="/menoversized">
+                    <img src="https://veirdo.in/cdn/shop/files/Artboard12.png?v=1724158654" alt="Oversize Tees" class="w-48 h-64 mx-auto rounded-lg">
+                    <p class="mt-4 text-xl font-medium">Oversize Tee's</p> 
+                </a>
+            </div>
+            <div class="text-center category-item">
+                <a href="/oldmoney">
+                    <img src="https://d1fufvy4xao6k9.cloudfront.net/images/blog/posts/2023/10/hockerty_man_in_a_posh_polo_shirt_beige_outfit_in_front_of_a_lu_64105600_94ac_4eba_8f97_5fc6b29f918a__1_.jpg" alt="Old School's" class="w-48 h-64 mx-auto rounded-lg">
+                    <p class="mt-4 text-xl font-medium">Old Money</p>
+                </a>
+            </div>
+            <div class="text-center category-item">
+                <a href="/mentraditional">
+                    <img src="https://manyavar.scene7.com/is/image/manyavar/CPOSK663_313-PURPLE.5436_14-10-2023-17-25:650x900" alt="Traditional's" class="w-48 h-64 mx-auto rounded-lg">
+                    <p class="mt-4 text-xl font-medium">Traditional's</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="flex justify-center space-x-4 mb-8">
+        <button class="px-4 py-2 border border-gray-500 rounded-md font-medium filter-button" id="jeansFilter">Jean's</button>
+        <button class="px-4 py-2 border border-gray-500 rounded-md font-medium filter-button" id="cargosFilter">Cargo's</button>
+        <button class="px-4 py-2 border border-gray-500 rounded-md font-medium filter-button" id="chinosFilter">Chino's</button>
+    </div>
+
+    <!-- Products Section -->
+    <section class="px-4 md:px-16 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center" id="productList">
+            <!-- Products will be dynamically generated here -->
+        </div>
+    </section>
+
+    <script>
+       const products = [
+            { id: 1, name: "Black Cargo's", image: "images/cargo_1.jpg", hoverImage: "images/cargo_1.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            { id: 2, name: "White Cargo's", image: "images/cargo_2.jpg", hoverImage: "images/cargo_2.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            { id: 3, name: "Brown Cargo's", image: "https://cdnd.lystit.com/photos/2013/11/02/asos-beige-g-star-cargo-pants-rovic-3d-loose-tapered-field-twill-product-1-14647476-106930087.jpeg", hoverImage: "https://cdnd.lystit.com/photos/2013/11/02/asos-beige-g-star-cargo-pants-rovic-3d-loose-tapered-field-twill-product-1-14647476-106930087.jpeg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            { id: 4, name: "Beige Cargo's", image: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fe148da706cf4b0fa92920fed41fed9a_9366/Premium_Essentials_Cargo_Pants_Beige_IM2128_21_model.jpg", hoverImage: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fe148da706cf4b0fa92920fed41fed9a_9366/Premium_Essentials_Cargo_Pants_Beige_IM2128_21_model.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Cargos" },
+            
+            
+            { id: 5, name: "Blue Jeans", image: "https://assets.ajio.com/medias/sys_master/root/20240216/2Vhj/65cf4b0305ac7d77bb5e4f63/-1117Wx1400H-442111369-indigo-MODEL.jpg", hoverImage: "https://assets.ajio.com/medias/sys_master/root/20240216/2Vhj/65cf4b0305ac7d77bb5e4f63/-1117Wx1400H-442111369-indigo-MODEL.jpg", price: 799.00, sizes: "S M L XL XXL", category: "Jean's" },
+            { id: 6, name: "Red Jean's", image: "https://i.pinimg.com/originals/2d/0e/ea/2d0eeac05867e5da9ca432c8cb59c2a2.jpg", hoverImage: "https://i.pinimg.com/originals/2d/0e/ea/2d0eeac05867e5da9ca432c8cb59c2a2.jpg", price: 799.00, sizes: "S M L XL XXL", category: "Jean's" },
+            { id: 7, name: "White Jean's", image: "https://assets.ajio.com/medias/sys_master/root/20240306/BkZT/65e855b805ac7d77bb9b5c5e/-1117Wx1400H-442111381-ltblue-MODEL.jpg", hoverImage: "https://assets.ajio.com/medias/sys_master/root/20240306/BkZT/65e855b805ac7d77bb9b5c5e/-1117Wx1400H-442111381-ltblue-MODEL.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Jean's" },
+            { id: 8, name: "Black Jean's", image: "https://assets.ajio.com/medias/sys_master/root/20241115/OFP6/673706cd0f47f80c8788d804/-1117Wx1400H-469706795-black-MODEL2.jpg", hoverImage: "https://assets.ajio.com/medias/sys_master/root/20241115/OFP6/673706cd0f47f80c8788d804/-1117Wx1400H-469706795-black-MODEL2.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Jean's" },
+
+            { id: 9, name: "White Chino's", image: "https://assets.ajio.com/medias/sys_master/root/20240306/BkZT/65e855b805ac7d77bb9b5c5e/-1117Wx1400H-442111381-ltblue-MODEL.jpg", hoverImage: "https://assets.ajio.com/medias/sys_master/root/20240306/BkZT/65e855b805ac7d77bb9b5c5e/-1117Wx1400H-442111381-ltblue-MODEL.jpg", price: 899.00, sizes: "S M L XL XXL", category: "Chino's" },
+            { id: 10, name: "Beige Chino's", image: "https://www.beyoung.in/api/cache/catalog/products/30-10/camel_beige_chinos_for_men_base_30_10_2024_700x933.jpg", hoverImage: "https://www.beyoung.in/api/cache/catalog/products/30-10/camel_beige_chinos_for_men_base_30_10_2024_700x933.jpg", price: 899.00, sizes: "S M L XL XXL", category: "Chino's" },
+            { id: 11, name: "Creme Chino's", image: "https://www.beyoung.in/api/cache/catalog/products/new_chinos_update_image_23_9_2022/seafoam_green_chinos_for_men_base_700x933.jpg", hoverImage: "https://www.beyoung.in/api/cache/catalog/products/new_chinos_update_image_23_9_2022/seafoam_green_chinos_for_men_base_700x933.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Chino's" },
+            { id: 12, name: "Brown Chino's", image: "https://www.beyoung.in/api/cache/catalog/products/30-10/wood_brown_chinos_for_men_base%20new_700x933.jpg", hoverImage: "https://www.beyoung.in/api/cache/catalog/products/30-10/wood_brown_chinos_for_men_base%20new_700x933.jpg", price: 999.00, sizes: "S M L XL XXL", category: "Chino's" },
+        ];
+
+
+        const productList = document.getElementById("productList");
+
+        // Function to display products
+        function displayProducts(category) {
+            productList.innerHTML = ''; // Clear current products
+            const filteredProducts = category ? products.filter(p => p.category === category) : products;
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product");
+
+                // Include the id in the URL
+                const queryParams = `?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}`;
+
+                productCard.innerHTML = `
+                <a href="/product?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&price=${encodeURIComponent(product.price)}&sizes=${encodeURIComponent(product.sizes)}" class="product-link">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <img src="${product.hoverImage}" alt="${product.name}" class="product-hover-image">
+                </a>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price}</p>
+                </div>
+                `;
+
+                productList.appendChild(productCard);
+            });
+        }
+
+        // Filter button handlers
+        document.getElementById("jeansFilter").addEventListener("click", () => displayProducts("Jean's"));
+        document.getElementById("cargosFilter").addEventListener("click", () => displayProducts("Cargos"));
+        document.getElementById("chinosFilter").addEventListener("click", () => displayProducts("Chino's"));
+
+        // Display all products by default
+        displayProducts();
+
+    </script>
+
+</body>
+</html>

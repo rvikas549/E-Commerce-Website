@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resell Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <%- include("header.ejs") %>
+
+    <main class="p-6">
+        <form action="/addresell" method="post" enctype="multipart/form-data">
+
+        
+            <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-bold mb-4">Select Type</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center justify-center w-full h-32 bg-gray-200 rounded-lg relative cursor-pointer">
+                    <!-- Hidden File Input -->
+                    <input 
+                        type="file" 
+                        id="fileInput" name="resellImg"
+                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                        onchange="previewImage(event)" 
+                        accept="image/*"
+                    />
+                    
+                    <!-- Image Placeholder -->
+                    <img 
+                        id="imagePreview" 
+                        src="/images/UPLOAD IMAGE.png" 
+                        alt="Click to upload" 
+                        class="object-cover w-full h-full rounded-lg"
+                    />
+                </div>
+
+                <script>
+                    // Function to handle image preview with size check
+                    function previewImage(event) {
+                        const file = event.target.files[0];
+                        const imagePreview = document.getElementById('imagePreview');
+                        
+                        if (file) {
+                            // Check if the file size is 15KB or less
+                            const maxSizeInBytes = 15 * 1024; // 15KB in bytes
+                            if (file.size > maxSizeInBytes) {
+                                alert("Please upload an image smaller than or equal to 15KB.");
+                                event.target.value = ''; // Reset the input
+                                imagePreview.src = "/images/UPLOAD IMAGE.png"; // Reset preview
+                                return;
+                            }
+                            
+                            // Preview the image if size is acceptable
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                imagePreview.src = e.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                </script>
+                
+                <div>
+                    <!-- Main Select -->
+                    <select id="mainSelect" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="menswear">Menswear</option>
+                        <option value="womenswear">Womenswear</option>
+                    </select>
+                    
+                    <!-- Sub Select -->
+                    <select id="subSelect" class="w-full mt-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none hidden">
+                        <!-- Sub-options will be populated dynamically -->
+                    </select>
+                </div>
+
+                <script>
+                    // Options for each main category
+                    const options = {
+                        menswear: [
+                            { value: "cargos", text: "Cargo's" },
+                            { value: "jeans", text: "Jeans" },
+                            { value: "chinos", text: "Chino's" },
+                        ],
+                        womenswear: [
+                            { value: "dresses", text: "Dresses" },
+                            { value: "skirts", text: "Skirts" },
+                            { value: "tops", text: "Tops" },
+                        ],
+                    };
+                    
+                    // Main and sub select elements
+                    const mainSelect = document.getElementById("mainSelect");
+                    const subSelect = document.getElementById("subSelect");
+                    
+                    // Event listener for main select
+                    mainSelect.addEventListener("change", () => {
+                        const selectedValue = mainSelect.value;
+                        
+                        // Clear previous options in the sub-select
+                        subSelect.innerHTML = "";
+                        
+                        if (selectedValue && options[selectedValue]) {
+                            // Populate sub-select with relevant options
+                            options[selectedValue].forEach((option) => {
+                                const opt = document.createElement("option");
+                                opt.value = option.value;
+                                opt.textContent = option.text;
+                                subSelect.appendChild(opt);
+                            });
+                            
+                            // Show the sub-select
+                            subSelect.classList.remove("hidden");
+                        } else {
+                            // Hide sub-select if no valid main option is selected
+                            subSelect.classList.add("hidden");
+                        }
+                    });
+                </script>
+            </div>
+
+            <h2 class="text-lg font-bold mt-8 mb-4">Product Detail</h2>
+            <div class="space-y-4">
+                <input
+                    type="text"
+                    placeholder="Product Name" name="resellName"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+                />
+                <input
+                    type="text"
+                    placeholder="Description"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+                />
+                <input
+                    type="text"
+                    placeholder="Price" name="resellPrice"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+                />
+                <input
+                    type="text"
+                    placeholder="Stock"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none"
+                />
+                <button
+                    type="submit"
+                    class="w-full px-4 py-2 bg-black text-white font-bold rounded-md"
+                >
+                    Sell
+                </button>
+            </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

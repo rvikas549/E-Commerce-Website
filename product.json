@@ -1,0 +1,23 @@
+[
+  {
+      "name": "Black Cargo's",
+      "image": "cargo_1.jpg",
+      "price": "INR 999/-",
+      "sizes": "S M L XL XXL",
+      "category": "Cargos"
+  },
+  {
+      "name": "White Cargo's",
+      "image": "cargo_2.jpg",
+      "price": "INR 999/-",
+      "sizes": "S M L XL XXL",
+      "category": "Cargos"
+  },
+  {
+      "name": "Red Jean's",
+      "image": "jeans_1.jpg",
+      "price": "INR 799/-",
+      "sizes": "S M L XL XXL",
+      "category": "Jean's"
+  }
+]

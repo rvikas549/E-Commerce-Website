@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGBT</title>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+        /* General styling for category items */
+        * {
+            font-family: inherit !important;
+        }
+        body {
+            font-family: 'Righteous', serif !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        .category-item {
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px; /* Limit width for each card */
+            margin: 0 auto; /* Center align */
+        }
+    
+        /* Image styling */
+        .category-item img {
+            width: 110%; /* Fully responsive width */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 400px; /* Limit the image height */
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+            cursor: pointer;
+            
+        }
+    
+        /* Text styling */
+        .category-item .font-medium {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            color: #333;
+        }
+    
+        /* Hover effects for the entire category item */
+        .category-item:hover {
+            transform: scale(1.1); /* Slight zoom effect */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            border-radius: 8px; /* Smooth border radius */
+        }
+    
+        /* Hover effect for the image */
+        .category-item:hover img {
+            opacity: 0.9; /* Slightly dim the image */
+        }
+    
+        /* Hover effect for the text */
+        .category-item:hover .font-medium {
+            transform: scale(1.1); /* Slightly enlarge the text */
+            opacity: 0.9; /* Slightly fade the text */
+        }
+    
+        /* Flexbox container for responsive layout */
+        .flex {
+            display: flex;
+            flex-wrap: wrap; /* Enable wrapping for smaller screens */
+            gap: 1rem; /* Add spacing between items */
+            justify-content: center; /* Center align items */
+        }
+    
+        /* Responsive styles for different screen sizes */
+        @media (max-width: 768px) {
+            .category-item {
+                max-width: 220px; /* Adjust width for smaller screens */
+            }
+        }
+    
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .category-item {
+                max-width: 250px; /* Adjust width for medium screens */
+            }
+        }
+    
+        @media (min-width: 1024px) {
+            .category-item {
+                max-width: 300px; /* Adjust width for larger screens */
+                max-height: 350px; /* Adjust height for consistency */
+            }
+        }
+    
+        @media (min-width: 1440px) {
+            .category-item {
+                max-width: 350px; /* Larger cards for very large screens */
+            }
+        }
+    </style>
+    
+</head>
+<body class="font-sans">
+
+
+
+<!-- Header -->
+<!-- <div>
+    <header class="bg-gray-100 p-4 font-righteous text-lg" style=" font-family: Righteous, serif; font-weight: 400;font-style: normal;"">
+        <div class="flex justify-between items-center">
+            <div class="flex space-x-2" href="/">
+                <h1 class="text-3xl font-bold font-righteous text-lg"><a href="/">BGBT</a>  </h1>
+                <svg class="h-8 w-8 text-gray-900"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                  </svg>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <input type="text" id="searchInput" placeholder="Cargo" class="p-2 border border-gray-300 rounded-md">
+                <button id="searchButton" class="px-4 py-2 bg-black text-white rounded-md hover:bg-white hover:text-black border border-black">Search</button>
+              
+            </div>
+            <div class="flex space-x-5" style="margin-bottom: 10px;">
+                <button id="sellButton" class="px-4 py-2 bg-black text-white rounded-md"><a href="/resell">RESELL</a></button>
+                <button id="blogButton" class="px-4 py-2 bg-black text-white rounded-md">BLOG</button>
+                <button id="cartButton" class="text-2xl ">
+                    <svg class="h-8 w-8 text-gray-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="9" cy="19" r="2" />  <circle cx="17" cy="19" r="2" />  <path d="M3 3h2l2 12a3 3 0 0 0 3 2h7a3 3 0 0 0 3 -2l1 -7h-15.2" /></svg>
+                </button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
+                </svg>
+                  
+                    
+                <button id="profileButton" class="text-2xl">
+                    <svg class="h-8 w-8 text-black-900"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />  <circle cx="12" cy="7" r="4" /></svg>
+                </button>
+            </div>
+        </div>
+        <nav class="flex justify-center bg-black text-white p-2 space-x-6 rounded-md">
+            <a href="/designer" class="hover:bg-white-700  px-4 py-2 rounded-md">Designer</a>
+            <a href="/mens" class="hover:bg-gray-700 px-4 py-2 rounded-md">Menswear</a>
+            <a href="/womens" class="hover:bg-gray-700 px-4 py-2 rounded-md">Womenswear</a>
+        </nav>
+    
+    </header>
+</div> -->
+<%- include("header.ejs") %>
+
+
+
+<!-- Hero Section -->
+<section class="unique font-righteous">
+    <!-- Content Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  
+    <div class="relative flex flex-col items-center justify-center text-white text-center h-screen ml-96">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 font-righteous">
+        "Shop Your Uniqueness - Stand Out in Style"
+      </h2>
+      <div class="space-x-12 commonbutton font-righteous">
+        <button class="px-4 py-2 bg-black rounded-md mensbutton hover:bg-white hover:text-black border border-black" >
+          <a href="/mens">Shop Menswear</a>
+        </button>
+        <button class="px-4 py-2 bg-black rounded-md womensbutton hover:bg-white hover:text-black border border-black">
+            <a href="/womens">Shop Womenswear</a>
+        </button>
+      </div>
+    </div>
+
+
+
+  <style>
+    .back-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  <style>
+    .unique {
+      position: relative;
+      background: url('/back.mp4') no-repeat center center;
+      background-size: cover;
+      height: 93vh;
+      overflow: hidden;
+    }
+  
+    .absolute {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  </section>
+  
+  
+
+
+<!-- Trending Section -->
+<section class="text-center py-10">
+    <h2 class="text-5xl font-bold mb-8">Trending</h2>
+    <div class="flex flex-col md:flex-row justify-center gap-8" id="categoryItems">
+        <div class="text-center category-item">
+            <a href="/menoversized">
+                <img src="https://veirdo.in/cdn/shop/files/Artboard12.png?v=1724158654" alt="Oversize Tees" class="w-48 h-64 mx-auto rounded-lg">
+                <!-- <p class="mt-4 text-xl font-medium">Oversize Tee's</p>  -->
+            </a>
+        </div>
+        <div class="text-center category-item">
+            <a href="/womenstop">
+                <img src="https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713776785_8691973.jpg?format=webp&w=480&dpr=1.1" alt="Old School's" class="w-48 h-64 mx-auto rounded-lg">
+                <!-- <p class="mt-4 text-xl font-medium">Crop Top</p> -->
+            </a>
+        </div>
+        <div class="text-center category-item">
+            <a href="/mentraditional">
+                <img src="https://manyavar.scene7.com/is/image/manyavar/CPOSK663_313-PURPLE.5436_14-10-2023-17-25:650x900" alt="Traditional's" class="w-48 h-64 mx-auto rounded-lg">
+                <!-- <p class="mt-4 text-xl font-medium">Traditional's</p> -->
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Blog Section -->
+<section class="py-16 bg-gray-100 text-center">
+    <h2 class="text-5xl font-bold mb-8">Blog</h2>
+    <!-- Ensure Flexbox styles for row alignment -->
+    <div class="flex flex-row justify-center gap-8">
+        <!-- Blog Post 1
+         <a href="/blog">
+             <div class="bg-white p-4 rounded-lg shadow-md text-center w-96">
+                 <img src="https://i.insider.com/667dc57ad1c84a0eaca880b0?width=850&format=jpeg&auto=webp" alt="plastic waste" 
+                      class="w-full h-40 object-cover rounded-lg mb-4" 
+                      usemap="#map1" width="400" height="379">
+                 <map name="map1">
+                     <area shape="rect" coords="0,0,1126,781" href="/blog">
+                 </map>
+                 <p class="text-lg font-medium">How 1.5 million plastic bottles are turned into clothing every day</p>
+                 <button id="blog1Button" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md"><a href="/blog">Read more</a></button>
+             </div>
+         </a> -->
+        <!-- Blog Post 2 -->
+         <a href="/blog">
+             <div class="bg-white p-4 rounded-lg shadow-md text-center w-96 category-item" id="categoryItems">
+                 <img src="https://www.nykaafashion.com/style-files/wp-content/uploads/2024/11/Banner.gif" alt="Nike" 
+                      class="w-full h-40 object-cover rounded-lg mb-4" 
+                      usemap="#map2" width="400" height="379">
+                 <map name="map2">
+                     <area shape="rect" coords="0,0,1126,781" href="/blog">
+                 </map>
+                 <p class="text-lg font-medium">Salomon DRX Defy Review: Defy-ing Gravel-ty</p>
+                 <button id="blog2Button" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md"><a href="/blog">Read more</a></button>
+             </div>
+         </a>
+    </div>
+</section>
+
+
+
+<script>
+    // // Search button functionality
+    // document.getElementById('searchButton').addEventListener('click', function() {
+    //     const searchQuery = document.getElementById('searchInput').value;
+    //     if (searchQuery) {
+    //         alert('Searching for: ' + searchQuery);
+    //     } else {
+    //         alert('Please enter a search term.');
+    //     }
+    // });
+
+    // // Donate button 
+    // document.getElementById('donateButton').addEventListener('click', function() {
+    //     alert('Thank you for considering donating!');
+    // });
+
+    // // Blogs button 
+    // document.getElementById('blogsButton').addEventListener('click', function() {
+    //     alert('Redirecting to Blogs...');
+    // });
+
+    // // Cart button 
+    // document.getElementById('cartButton').addEventListener('click', function() {
+    //     alert('Your Cart is empty!');
+    // });
+
+    // // Profile button 
+    // document.getElementById('profileButton').addEventListener('click', function() {
+    //     alert('Please log in to your profile!');
+    // });
+
+    // // Read more button functionality for blog 1
+    // document.getElementById('blog1Button').addEventListener('click', function() {
+    //     alert('Redirecting to the full blog post: "2nd Hand Violence: Fashion Waste Colonialism"');
+    // });
+
+    // // Read more button functionality for blog 2
+    // document.getElementById('blog2Button').addEventListener('click', function() {
+    //     alert('Redirecting to the full blog post: "2nd Hand Violence: Fashion Waste Colonialism"');
+    // });
+
+// image changing fo oversized
+const oversizedContainer = document.querySelector('#oversized-container');
+const oversizedImage = document.getElementById('#oversized');
+
+oversizedContainer.addEventListener('mouseover', () => {
+    oversizedImage.src = '/BlackCargo.jpg'; 
+});
+
+oversizedContainer.addEventListener('mouseout', () => {
+    oversizedImage.src = '/oversized.jpg';
+});
+
+//for party wear image
+const oldschoolContainer = document.querySelector('#partyWear-container');
+const oldschoolImage = document.getElementById('partyWear');
+
+oldschoolContainer.addEventListener('mouseover', () => {
+    oldschoolImage.src = '/old_school_men.jpg'; 
+});
+
+oldschoolContainer.addEventListener('mouseout', () => {
+    oldschoolImage.src = '/images.jpeg'; 
+});
+
+// For traditionals
+const traditionalContainer = document.querySelector('#traditional-container');
+const traditionalImage = document.getElementById('traditional');
+
+traditionalContainer.addEventListener('mouseover', () => {
+    traditionalImage.src = '/chino_1.jpg'; 
+});
+
+traditionalContainer.addEventListener('mouseout', () => {
+    traditionalImage.src = '/img_traditonal.jpg';
+});
+
+
+</script>
+
+</body>
+</html>
