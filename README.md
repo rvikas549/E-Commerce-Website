@@ -2,7 +2,7 @@
 <h1>BGBT Store</h1>
 <h4>This is a Full Stack project using [Node.JS,Express,EJS,Postgres Database]</h4>
 
-<h6>We can use this website and add our own customisable products
+We can use this website and add our own customisable products
 -The Uniquness in this project is that we can Resell the products of our store BGBT clothes only and we can check the quality 
   and refurbish the cloth and sell it for very cheaper price
   This motive was used because a lot of clothes are being wasted and people use very few time and throw insted it can we reselled for a cheaper price
@@ -23,7 +23,6 @@ Steps to run this code on ur PC
 9.Open any Browser and search 
       http://localhost:3000
 10.Everthing is ready and you must find this E-commerce Website 
-</h6>
 
 <img width="441" alt="Screenshot 2024-12-11 at 11 11 28 PM" src="https://github.com/user-attachments/assets/9f457973-54c9-4217-adbf-e65b2eabc9f1" />
 
