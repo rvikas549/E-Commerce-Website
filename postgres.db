@@ -1,0 +1,28 @@
+/*Create this Quries in Postgres Database
+
+Create a new Database called BGBT and Create the following Tables*/
+
+CREATE TABLE resell(
+    id SERIAL PRIMARY KEY,
+    refurbimg BYTEA,
+    refurbname VARCHAR(20),
+    refurbprice double
+);
+
+
+CREATE TABLE cart(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20),
+    price float,
+    quantity float,
+    image BYTEA,
+    size VARCHAR(5)
+);
+
+
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255),
+    password VARCHAR(255)
+);
+
