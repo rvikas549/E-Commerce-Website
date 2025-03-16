@@ -31,11 +31,9 @@ import sendOrderConfirmation from './emailService.js';
 
 
 
-// Load environment variables
-require('dotenv').config();
-const pg = require('pg');
 
-// Create a new database client using DATABASE_URL
+// Load environment variables
+env.config();
 const db = new pg.Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -48,7 +46,10 @@ db.connect()
     .then(() => console.log("✅ Connected to PostgreSQL database!"))
     .catch(err => console.error("❌ Database connection error:", err));
 
-module.exports = db;
+export default db;  // ✅ Correct ES Module Export
+
+
+
 
 
 
