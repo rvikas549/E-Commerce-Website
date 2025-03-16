@@ -17,15 +17,43 @@ import sendOrderConfirmation from './emailService.js';
 
 
 // Database Connection
-env.config();
+// env.config();
+// const db = new pg.Client({
+//     user: process.env.PG_USER,
+//     host: process.env.PG_HOST,
+//     database: process.env.PG_DATABASE,
+//     password: process.env.PG_PASSWORD,
+//     port: process.env.PG_PORT,
+// });
+// db.connect();
+
+
+
+
+
+// Load environment variables
+require('dotenv').config();
+const pg = require('pg');
+
+// Create a new database client using DATABASE_URL
 const db = new pg.Client({
-    user: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    database: process.env.PG_DATABASE,
-    password: process.env.PG_PASSWORD,
-    port: process.env.PG_PORT,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false, // Required for Render's managed PostgreSQL
+    },
 });
-db.connect();
+
+// Connect to the database
+db.connect()
+    .then(() => console.log("✅ Connected to PostgreSQL database!"))
+    .catch(err => console.error("❌ Database connection error:", err));
+
+module.exports = db;
+
+
+
+
+
 
 // Run Server
 const app = express();
