@@ -1,5 +1,5 @@
 # E-Commerce-Website
-<h1>BGBT Store</h1> <a href="https://bgbt.onrender.com">https://bgbt.onrender.com</a>
+<h1>BGBT Store</h1> <p>Deployed On Render</p><a href="https://bgbt.onrender.com">https://bgbt.onrender.com</a>
 <h4>This is a Full Stack project using [Node.JS,Express,EJS,Postgres Database]</h4>
 
 We can use this website and add our own customisable products<br>
